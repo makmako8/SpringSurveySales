@@ -1,7 +1,10 @@
 package com.example.springsurveysales.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +18,10 @@ public class Survey {
     private Long id;
 
     private String username; // 回答者（ユーザー名）
+    
+    @ElementCollection
+    private List<String> answers = new ArrayList<>();
+    
     private String question1;
     private String question2;
     private String question3;
@@ -38,6 +45,12 @@ public class Survey {
     }
     public void setUsername(String username) {
     	this.username = username;
+    }
+    public List<String> getAnswers() {
+    	return answers;
+    }
+    public void setAnswers(List<String> answers) {
+    	this.answers = answers;
     }
     public String getQuestion1() {
     	return question1;

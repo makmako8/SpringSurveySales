@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>質問追加</title>
+</head>
+<body>
+<h2>質問追加</h2>
+<form th:action="@{/admin/questions/save}" method="post">
+    質問文: <input type="text" th:field="${question.questionText}" required/>
+    <button type="submit">保存</button>
+</form>
+<a href="/admin/questions">戻る</a>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>質問一覧</title>
+</head>
+<body>
+<h2>質問一覧</h2>
+<a href="/admin/questions/new">新しい質問を追加</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>質問</th>
+        <th>削除</th>
+    </tr>
+    <tr th:each="q : ${questions}">
+        <td th:text="${q.id}"></td>
+        <td th:text="${q.questionText}"></td>
+        <td><a th:href="@{'/admin/questions/delete/' + ${q.id}}">削除</a></td>
+    </tr>
+</table>
+</body>
+</html>

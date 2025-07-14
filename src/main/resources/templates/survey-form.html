@@ -3,20 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>アンケートフォーム</title>
+	<script>
+	    function disableSubmitButton(form) {
+	        const btn = document.getElementById('submit-btn');
+	        btn.disabled = true; // ボタンを無効化
+	        btn.innerText = '送信中...'; // ボタンのテキストを変更
+	        form.submit(); // フォーム送信
+	    }
+	</script>
 </head>
 <body>
+	<h2>アンケート</h2>
 
-	<form th:action="@{/submit}" method="post" th:object="${survey}">
-	     <label>Q1: 好きな色は何ですか？</label><br>
-	     <input type="text" th:field="*{question1}" required/><br><br>
-
-	     <label>Q2: 趣味を教えてください。</label><br>
-	     <input type="text" th:field="*{question2}" required/><br><br>
-
-	     <label>Q3: 当サイトをどこで知りましたか？</label><br>
-	     <input type="text" th:field="*{question3}" required/><br><br>
-
-	     <button type="submit">送信する</button>
-	 </form>
+<form th:action="@{/submit}" method="post" onsubmit="disableSubmitButton(this); return false;">
+	    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	    <div th:each="q : ${questions}">
+	        <label th:text="${q.questionText}">質問</label><br>
+	        <input type="text" name="answers" required/><br><br>
+	    </div>
+	   <button type="submit" id="submit-btn">送信</button>
+	</form>
 </body>
 </html>
